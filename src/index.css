@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/* Colour tokens. Light is the default; dark applies via system preference or the toggle. */
+:root {
+  --bg: #eef1f4;
+  --surface: #ffffff;
+  --ink: #14191f;
+  --muted: #58636f;
+  --line: #cbd3da;
+  --signal: #b87800;
+  --signal-bg: #f2b134;
+  --on-signal: #14191f;
+  --beam: 20 25 31;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161b; --surface: #1a2129; --ink: #e8edf1; --muted: #97a3ae;
+    --line: #2c363f; --signal: #f2b134; --beam: 232 237 241; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161b; --surface: #1a2129; --ink: #e8edf1; --muted: #97a3ae;
+  --line: #2c363f; --signal: #f2b134; --beam: 232 237 241; color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-signal: var(--signal);
+  --color-signal-bg: var(--signal-bg);
+  --color-on-signal: var(--on-signal);
+  --font-display: "Archivo Variable", system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 56px);
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 17px/1.6 var(--font-sans);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.05; }
+:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
